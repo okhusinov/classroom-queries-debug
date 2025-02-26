@@ -22,7 +22,7 @@
       Title
     </label>
 
-    <input type="text" id="title_box" name="query_title">
+    <input type="text" id="title_box" name="query_title" value="<%= @the_course.title %>">
   </div>
 
   <div>
@@ -87,13 +87,15 @@
     Number of enrolled students
   </dt>
   <dd>
-    <%= Enrollment.where({ :course_id => @the_course.id }) %>
+    <%= Enrollment.where({ :course_id => @the_course.id }).count %>
   </dd>
 </dl>
 
 <hr>
 
 <h2>Roster</h2>
+
+
 <ul>
   <% Enrollment.where({ :course_id => @the_course.id }).each do |enrollment| %>
     <% student = Student.where({ :id => enrollment.student_id }).at(0) %>
